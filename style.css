@@ -1,0 +1,313 @@
+/* --- 1. Variables & Reset --- */
+:root {
+    --bg-dark: #0f172a;       /* Deep Midnight Blue */
+    --bg-card: #1e293b;       /* Lighter Blue/Grey for cards */
+    --primary: #FFC107;       /* Taxi Yellow */
+    --primary-glow: rgba(255, 193, 7, 0.4);
+    --text-light: #f1f5f9;
+    --text-gray: #94a3b8;
+    --accent-green: #10b981;  /* For Whatsapp/Success */
+    --gradient: linear-gradient(135deg, #FFC107 0%, #FF9800 100%);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    overflow-x: hidden; /* Fixes horizontal scroll bug */
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.section-padding { padding: 80px 0; }
+.bg-darker { background-color: #0b1120; }
+
+/* --- 2. Navbar --- */
+.navbar {
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(10px); /* Glass effect */
+    height: 70px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-light);
+}
+
+.highlight { color: var(--primary); }
+
+.nav-links { display: flex; gap: 30px; align-items: center; }
+
+.nav-link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-link:hover { color: var(--primary); }
+
+.btn-nav {
+    background: var(--gradient);
+    color: #000;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+}
+
+/* Hamburger */
+.hamburger { display: none; cursor: pointer; }
+.bar { width: 25px; height: 3px; background: var(--text-light); margin: 5px; transition: 0.3s; }
+
+/* --- 3. Hero Section (Animated) --- */
+.hero {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+}
+
+.hero-content { z-index: 2; position: relative; margin-top: -50px; }
+
+.badge {
+    background: rgba(255, 193, 7, 0.1);
+    color: var(--primary);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    border: 1px solid var(--primary);
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero-title span { color: var(--primary); }
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-gray);
+    margin-bottom: 30px;
+    max-width: 600px;
+}
+
+/* Hero Buttons */
+.btn {
+    display: inline-block;
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-weight: 600;
+    margin-right: 15px;
+    transition: transform 0.3s;
+}
+
+.btn:hover { transform: translateY(-3px); }
+
+.btn-primary {
+    background: var(--gradient);
+    color: #000;
+    box-shadow: 0 0 20px var(--primary-glow);
+}
+
+.btn-outline {
+    border: 2px solid var(--text-light);
+    color: var(--text-light);
+}
+
+.btn-outline:hover { background: var(--text-light); color: #000; }
+
+/* Pulse Animation for Call Button */
+.pulse-effect { animation: pulse 2s infinite; }
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 193, 7, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
+}
+
+/* --- 4. Taxi Road Animation --- */
+.road {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 120px;
+    background: #111;
+    border-top: 4px solid #333;
+    z-index: 1;
+}
+
+.road-lines {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 4px;
+    background: repeating-linear-gradient(90deg, #fff 0, #fff 50px, transparent 50px, transparent 100px);
+    animation: moveRoad 1s linear infinite;
+}
+
+.taxi-wrapper {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 4rem;
+    color: var(--primary);
+    /* Suspension bounce */
+    animation: bounce 1s ease-in-out infinite alternate; 
+}
+
+.headlight {
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    width: 100px;
+    height: 40px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent);
+    clip-path: polygon(0 40%, 100% 0, 100% 100%, 0 60%);
+}
+
+@keyframes moveRoad {
+    from { background-position: 0; }
+    to { background-position: -100px; }
+}
+
+@keyframes bounce {
+    from { transform: translateX(-50%) translateY(0); }
+    to { transform: translateX(-50%) translateY(-5px); }
+}
+
+/* --- 5. Fleet Cards & Reviews --- */
+.section-header { text-align: center; margin-bottom: 50px; }
+.section-header h2 { font-size: 2.5rem; margin-bottom: 10px; }
+.section-header p { color: var(--text-gray); }
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.card, .review-card {
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary);
+}
+
+.card-icon {
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.price-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    padding: 8px 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* --- 6. Routes --- */
+.routes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.route-item {
+    background: var(--bg-card);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.route-item i { color: var(--primary); }
+
+/* --- 7. Contact/Booking --- */
+.booking-section { padding: 50px 0; }
+.contact-box {
+    background: var(--bg-card);
+    border-radius: 30px;
+    padding: 50px;
+    text-align: center;
+    position: relative;
+    border-top: 5px solid var(--primary);
+    overflow: hidden;
+}
+
+.main-icon { font-size: 4rem; color: var(--primary); margin-bottom: 20px; }
+.phone-link { font-size: 2.5rem; font-weight: 800; display: block; margin: 20px 0; color: var(--white); }
+
+.btn-whatsapp { background-color: var(--accent-green); color: white; border: none; }
+
+.status { margin-top: 20px; color: var(--accent-green); font-weight: 500; }
+.dot { height: 10px; width: 10px; background-color: var(--accent-green); border-radius: 50%; display: inline-block; margin-right: 5px; animation: blink 1.5s infinite; }
+@keyframes blink { 50% { opacity: 0.5; } }
+
+/* --- 8. Footer --- */
+footer { background: #000; padding: 50px 0 20px; text-align: center; border-top: 1px solid #222; }
+.footer-bottom { margin-top: 20px; font-size: 0.8rem; color: #555; }
+
+/* --- 9. Reveal Animations --- */
+.reveal { opacity: 0; transform: translateY(50px); transition: 0.8s ease; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+
+/* --- 10. Mobile Responsive --- */
+@media (max-width: 768px) {
+    .nav-links {
+        position: fixed;
+        right: -100%;
+        top: 70px;
+        background: var(--bg-card);
+        width: 100%;
+        height: calc(100vh - 70px);
+        flex-direction: column;
+        justify-content: center;
+        transition: 0.4s;
+    }
+    .nav-links.active { right: 0; }
+    .hamburger { display: block; }
+    
+    .hero-title { font-size: 2.5rem; }
+    .phone-link { font-size: 1.8rem; }
+    .taxi-wrapper { font-size: 3rem; }
+}
